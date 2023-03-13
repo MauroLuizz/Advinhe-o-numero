@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+    <meta charset="UTF-8">
+    <title>Adivinhe o número</title>
+  </head>
+  <body style="display: flex; justify-content: center; align-items: center; ">
+    <div>
+      <h1>Adivinhe o número</h1>
+      <p> Tente adivinhar um número de 0 a 1000!</p>
+      <label for="guess">Digite um número:</label>
+      <input type="number" id="guess" name="guess" min="1" max="1000">
+      <button type="button" class="btn btn-primary" onclick="guessNumber()">Adivinhar</button>
+      <p id="result"></p>
+      <script>
+        // Gerar um número aleatório entre 1 e 1000
+        const numero_aleatorio = Math.floor(Math.random() * 1000) + 1;
+
+        // Inicializar o contador de tentativas
+        let num_tentativas = 0;
+
+        function guessNumber() {
+          // Obter o valor do campo de entrada
+          const guess = document.getElementById("guess").value;
+          // Verificar se o valor é um número válido
+          if (isNaN(guess) || guess < 1 || guess > 1000) {
+            document.getElementById("result").innerHTML = "Por favor, digite um número entre 1 e 1000.";
+          } else {
+            // Incrementar o contador de tentativas
+            num_tentativas++;
+            // Comparar o valor da entrada com o número aleatório
+            if (guess == numero_aleatorio) {
+              document.getElementById("result").innerHTML = "Parabéns, você adivinhou o número em " + num_tentativas + " tentativas!";
+            } else if (guess < numero_aleatorio) {
+              document.getElementById("result").innerHTML = "O número é maior do que " + guess + ". Tente novamente.";
+            } else {
+              document.getElementById("result").innerHTML = "O número é menor do que " + guess + ". Tente novamente.";
+            }
+            // Atualizar a exibição do contador de tentativas
+            document.getElementById("tentativas").innerHTML = "Tentativas: " + num_tentativas;
+          }
+        }
+      </script>
+      <p id="tentativas">Tentativas: 0</p>
+    </div>
+  </body>
+</html>
